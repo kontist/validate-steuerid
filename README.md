@@ -3,13 +3,13 @@
 
 # Installation
 ``` 
-npm install validate-steuer-id
+npm install validate-steuerid
 ```
 
 # Usage
 
 ```js
-const validateSteuerId = require('validate-steuer-id')
+const validateSteuerId = require('validate-steuerid')
 
 validateSteuerId('65299970480')
 // => false

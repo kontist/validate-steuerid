@@ -1,11 +1,9 @@
 {
-  "name": "validate-steuer-id",
+  "name": "validate-steuerid",
   "version": "1.0.0",
   "description": "Package to validate German tax ID / steuer ID",
   "keywords": [
-    "canonical",
     "deutschland",
-    "elster",
     "german",
     "germany",
     "steuerid",
@@ -15,7 +13,7 @@
     "taxes"
   ],
   "license": "MIT",
-  "repository": "kontist/validate-steuer-id",
+  "repository": "kontist/validate-steuerid",
   "author": "Kontist GmbH (kontist.com)",
   "files": [
     "index.d.ts",
