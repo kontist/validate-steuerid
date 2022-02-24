@@ -1,6 +1,6 @@
 'use strict'
-import { generate, validate, isOccurencesValid } from './index.js'
-import assert from 'assert'
+import { generate, validate, isOccurencesValid } from './index'
+import * as assert from 'assert'
 
 const examples = [
   { steuerId: '26954371827', expected: true },

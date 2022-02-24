@@ -124,6 +124,7 @@ export function isOccurencesValid (digits) {
   let num2or3occurences = 0
 
   for (const [, value] of occurences) {
+    console.debug('Value is:', value)
     // if any digit occurred 4 or more times, return false
     if (value >= 4) {
       console.debug('Found a 4 or more occurences in:', digits)
@@ -131,7 +132,6 @@ export function isOccurencesValid (digits) {
     }
     // if there is more than 1 2or3 occurrences return false
     if (value === 2 || value === 3) { num2or3occurences++ }
-    console.debug('Num 2 or 3 occurrences for digits is:', occurences)
     if (num2or3occurences > 1) {
       console.debug('Found more than 1 amount of 2 or three occurences is more than one:', num2or3occurences)
       return false

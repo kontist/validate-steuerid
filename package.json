@@ -17,16 +17,23 @@
   "repository": "kontist/validate-steuerid",
   "author": "Kontist GmbH (kontist.com)",
   "files": [
-    "index.js"
+    "src/index.ts"
   ],
   "scripts": {
-    "test": "standard '**/*.{js,ts}' && mocha && tsd"
+    "transpile": "tsc && babel --root-mode upward src --extensions \".js\" --out-dir dist --copy-files --source-maps --quiet && echo \"--ALL FILES TRANSPILED!\"",
+    "test": "ts-mocha -p tsconfig.json src/**/*.spec.ts"
   },
   "devDependencies": {
+    "@types/expect": "^24.3.0",
+    "@types/mocha": "^9.1.0",
+    "@types/node": "^17.0.21",
     "@typescript-eslint/eslint-plugin": "^5.5.0",
     "@typescript-eslint/parser": "^5.5.0",
+    "babel-cli": "^6.26.0",
     "mocha": "^9.0.3",
     "standard": "^16.0.3",
+    "ts-mocha": "^9.0.2",
+    "ts-node": "^10.5.0",
     "tsd": "^0.17.0",
     "typescript": "^3.9.3"
   },
@@ -41,5 +48,6 @@
     "plugins": [
       "@typescript-eslint/eslint-plugin"
     ]
-  }
+  },
+  "dependencies": {}
 }
