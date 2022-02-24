@@ -11,7 +11,8 @@ const getTail = (arr = []) => {
   return lastIndex >= 0 ? arr[lastIndex] : null
 }
 
-const groupByCharacters = (arr = []) => {
+const getNumOccurencesMap = (arr = []) => {
+  console.debug('Array to group: ', arr)
   const map = {}
   arr.forEach(num => {
     if (!(num in map)) {
@@ -20,6 +21,7 @@ const groupByCharacters = (arr = []) => {
       map[num] += 1
     }
   })
+  console.debug('Number of occurrences: ', map)
   return map
 }
 
@@ -29,14 +31,15 @@ const groupByNumOfOccurrences = (map = {}) => {
     const numOfOccurrence = map[key]
     if (result[numOfOccurrence] === undefined) { result[numOfOccurrence] = [key] } else { result[numOfOccurrence] = [...result[numOfOccurrence], key] }
   }
+  console.debug('Result of grouping by num of occurrences:', result)
   return result
 }
 
 const checkDoubleOrTriple = (groupedByOccurrences) => {
   // has to have either one double digit OR one triple digit, never both.
   if (groupedByOccurrences[2] && groupedByOccurrences[2].length === 1 &&
-      groupedByOccurrences[1] && groupedByOccurrences[1].length === 8) { return true } else if (groupedByOccurrences[3] && groupedByOccurrences[3].length === 1 &&
-           groupedByOccurrences[1] && groupedByOccurrences[1].length === 7) { return true }
+    groupedByOccurrences[1] && groupedByOccurrences[1].length === 8) { return true } else if (groupedByOccurrences[3] && groupedByOccurrences[3].length === 1 &&
+    groupedByOccurrences[1] && groupedByOccurrences[1].length === 7) { return true }
   return false
 }
 
@@ -80,7 +83,11 @@ const getChecksum = (steuerId = []) => {
   return (checkDigit === 10) ? 0 : checkDigit
 }
 
-const validate = (steuerId) => {
+export function validate (steuerId) {
+  if (typeof steuerId !== 'string') {
+    throw new TypeError('`steuerId` must be a string')
+  }
+
   // Make sure the steuerId is string then split it into an integer array
   steuerId = steuerId.split('').map(n => parseInt(n, 10))
 
@@ -91,7 +98,7 @@ const validate = (steuerId) => {
 
   // Arranges the characters and their occurrences for easier checks.
   const firstTen = steuerId.slice(0, 10)
-  const groupedByCharacters = groupByCharacters(firstTen)
+  const groupedByCharacters = getNumOccurencesMap(firstTen)
   const groupedByOccurrences = groupByNumOfOccurrences(groupedByCharacters)
 
   // Checks the validaty of the steuerId
@@ -106,10 +113,69 @@ const validate = (steuerId) => {
   return false
 }
 
-module.exports = (steuerId) => {
-  if (typeof steuerId !== 'string') {
-    throw new TypeError('`steuerId` must be a string')
+export function isOccurencesValid (digits) {
+  const occurences = new Map()
+  digits.forEach((item) => {
+    if (occurences.get(item) === undefined) {
+      occurences.set(item, 1)
+    } else { occurences.set(item, occurences.get(item) + 1) }
+  })
+  console.debug('Occurences: ', occurences)
+  let num2or3occurences = 0
+
+  for (const [, value] of occurences) {
+    // if any digit occurred 4 or more times, return false
+    if (value >= 4) {
+      console.debug('Found a 4 or more occurences in:', digits)
+      return false
+    }
+    // if there is more than 1 2or3 occurrences return false
+    if (value === 2 || value === 3) { num2or3occurences++ }
+    console.debug('Num 2 or 3 occurrences for digits is:', occurences)
+    if (num2or3occurences > 1) {
+      console.debug('Found more than 1 amount of 2 or three occurences is more than one:', num2or3occurences)
+      return false
+    }
+
+    if (value === 3) {
+      const triplet = digits.find((item, index, array) => (item === array[index - 1] && item === array[index - 2]))
+      if (triplet) {
+        console.debug('Triplet found ', triplet)
+        return false
+      }
+    }
+  }
+  console.debug('Occurrences are valid: ', occurences)
+  return true
+}
+
+/*
+The first number is not 0
+In the first 10 digits there is exactly one number double or triple
+If there are 3 same numbers at the position 1 to 10 those double numbers could never be consecutive
+ */
+export function generate () {
+  let digits = []
+  // does not start with a 0
+  const digit = Math.round((Math.random() * 8) + 1)
+  digits.push(digit)
+
+  let candidate = []
+  while (digits.length < 10) {
+    // console.debug('digit length is less than 10')
+
+    let isValidDigit = false
+    let candidateDigit
+    while (!isValidDigit) {
+      candidateDigit = Math.round(Math.random() * 9)
+      candidate = [...digits, candidateDigit]
+      console.debug('Candidate is: ', candidate)
+      if (isOccurencesValid(candidate)) {
+        isValidDigit = true
+      }
+    }
+    digits = [...candidate]
   }
 
-  return validate(steuerId)
+  return Number(digits.join('') + getChecksum(digits))
 }
