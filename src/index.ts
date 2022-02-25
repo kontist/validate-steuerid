@@ -100,7 +100,7 @@ export function isOccurencesValid (digits) {
   return checkDoubleOrTriple(groupedByOccurrences) && validConsecutive;
 }
 
-export function validate (steuerId) : boolean{
+export function validateSteuerId (steuerId) : boolean{
   if (typeof steuerId !== 'string') {
     throw new TypeError('`steuerId` must be a string');
   }
@@ -140,7 +140,7 @@ The first number is not 0
 In the first 10 digits there is exactly one number double or triple
 If there are 3 same numbers at the position 1 to 10 those double numbers could never be consecutive
  */
-export function generate () : string {
+export function generateSteuerId () : string {
   let digits: number[];
   digits = [];
   // does not start with a 0

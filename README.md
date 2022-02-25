@@ -8,8 +8,9 @@ npm install validate-steuerid
 
 # Usage
 
+You can either validate steuerId or generate a valid steuerId
 ```js
-const validateSteuerId = require('validate-steuerid')
+const { validateSteuerId, generateSteuerId } = require('validate-steuerid')
 
 validateSteuerId('65299970480')
 // => false
@@ -19,12 +20,22 @@ validateSteuerId('65929970489')
 
 validateSteuerId('26954371827')
 // => true
+
+generateSteuerId()
+// => random steuerId string
 ```
 
-# Parameters
+# Methods
 ## validateSteuerId(steuerId)
-### steuerId
-type: `string`
+### Takes `steuerId`:
+  - type: `string`
+### Returns `boolean`
+<br>
+
+## generateSteuerId()
+### Returns `string`
+
+<br>
 
 # References
 For developing the algorithm, we referenced the European Commission's TIN check modules stated [here](https://ec.europa.eu/taxation_customs/tin/#/check-tin).

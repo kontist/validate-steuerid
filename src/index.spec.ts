@@ -1,5 +1,5 @@
 'use strict'
-import { generate, validate, isOccurencesValid } from './index'
+import { generateSteuerId, validateSteuerId, isOccurencesValid } from './index'
 import * as assert from 'assert'
 
 const examples = [
@@ -12,26 +12,26 @@ const examples = [
 
 for (const example of examples) {
   it('validates a steuerId successfully', () => {
-    assert.strictEqual(validate(example.steuerId), example.expected)
+    assert.strictEqual(validateSteuerId(example.steuerId), example.expected)
   })
 }
 
 it('throws an error if steuerId is not a string', () => {
-  assert.throws(() => validate(65299970480), {
+  assert.throws(() => validateSteuerId(65299970480), {
     name: 'TypeError',
     message: '`steuerId` must be a string'
   })
 })
 
 it('throws an error if steuerId does not contain 11 digits', () => {
-  assert.throws(() => validate('26954371'), {
+  assert.throws(() => validateSteuerId('26954371'), {
     name: 'TypeError',
     message: '`steuerId` must contain exactly 11 digits'
   })
 })
 
 it('throws an error if steuerId contains non numerical characters', () => {
-  assert.throws(() => validate('26954371rfe'), {
+  assert.throws(() => validateSteuerId('26954371rfe'), {
     name: 'TypeError',
     message: '`steuerId` can not contain non numerical characters'
   })
@@ -39,14 +39,14 @@ it('throws an error if steuerId contains non numerical characters', () => {
 
 describe('Generate function', () => {
   it('Is able to generate a number without entering into an infinite loop', () => {
-    const generatedTaxID = generate()
+    const generatedTaxID = generateSteuerId()
     assert.deepStrictEqual(typeof generatedTaxID, 'string')
   })
 
   it('Generates valid tax ids', () => {
     for (let i = 0; i < 10; i++) {
-      const generatedTaxID = generate()
-      assert.deepStrictEqual(validate(generatedTaxID), true)
+      const generatedTaxID = generateSteuerId()
+      assert.deepStrictEqual(validateSteuerId(generatedTaxID), true)
     }
   })
 })
