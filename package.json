@@ -16,9 +16,7 @@
   "license": "MIT",
   "repository": "kontist/validate-steuerid",
   "author": "Kontist GmbH (kontist.com)",
-  "files": [
-    "src/index.ts"
-  ],
+  "main": "dist/index.js",
   "scripts": {
     "transpile": "tsc && babel --root-mode upward src --extensions \".js\" --out-dir dist --copy-files --source-maps --quiet && echo \"--ALL FILES TRANSPILED!\"",
     "test": "ts-mocha -p tsconfig.json src/**/*.spec.ts"
@@ -49,5 +47,6 @@
       "@typescript-eslint/eslint-plugin"
     ]
   },
-  "dependencies": {}
+  "dependencies": {},
+  "typings": "dist/index.d.ts"
 }
