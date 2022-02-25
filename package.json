@@ -1,6 +1,6 @@
 {
   "name": "validate-steuerid",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Package to validate German tax ID / steuer ID",
   "type": "module",
   "keywords": [
