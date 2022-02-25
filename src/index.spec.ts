@@ -41,7 +41,7 @@ describe('Generate function', () => {
   it('Is able to generate a number without entering into an infinite loop', () => {
     const generatedTaxID = generate()
     console.debug('Generated TaxID: ', generatedTaxID)
-    assert.deepStrictEqual(typeof generatedTaxID, 'number')
+    assert.deepStrictEqual(typeof generatedTaxID, 'string')
   })
 
   it('Generates valid tax ids', () => {

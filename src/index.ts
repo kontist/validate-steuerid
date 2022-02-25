@@ -29,7 +29,11 @@ const groupByNumOfOccurrences = (map = {}) => {
   const result = {}
   for (const key in map) {
     const numOfOccurrence = map[key]
-    if (result[numOfOccurrence] === undefined) { result[numOfOccurrence] = [key] } else { result[numOfOccurrence] = [...result[numOfOccurrence], key] }
+    if (result[numOfOccurrence] === undefined) {
+      result[numOfOccurrence] = [key]
+    } else {
+      result[numOfOccurrence] = [...result[numOfOccurrence], key]
+    }
   }
   console.debug('Result of grouping by num of occurrences:', result)
   return result
@@ -38,8 +42,12 @@ const groupByNumOfOccurrences = (map = {}) => {
 const checkDoubleOrTriple = (groupedByOccurrences) => {
   // has to have either one double digit OR one triple digit, never both.
   if (groupedByOccurrences[2] && groupedByOccurrences[2].length === 1 &&
-    groupedByOccurrences[1] && groupedByOccurrences[1].length === 8) { return true } else if (groupedByOccurrences[3] && groupedByOccurrences[3].length === 1 &&
-    groupedByOccurrences[1] && groupedByOccurrences[1].length === 7) { return true }
+    groupedByOccurrences[1] && groupedByOccurrences[1].length === 8) {
+    return true
+  } else if (groupedByOccurrences[3] && groupedByOccurrences[3].length === 1 &&
+    groupedByOccurrences[1] && groupedByOccurrences[1].length === 7) {
+    return true
+  }
   return false
 }
 
@@ -49,9 +57,15 @@ const checkConsecutivePositions = (firstTen) => {
 
   for (let i = 0; i < firstTen.length; i++) {
     const num = firstTen[i]
-    if (recurrence.includes(num)) { recurrence.push(num) } else { recurrence = [num] }
+    if (recurrence.includes(num)) {
+      recurrence.push(num)
+    } else {
+      recurrence = [num]
+    }
 
-    if (recurrence.length === 3) { return false }
+    if (recurrence.length === 3) {
+      return false
+    }
   }
 
   return true
@@ -92,9 +106,15 @@ export function validate (steuerId) {
   steuerId = steuerId.split('').map(n => parseInt(n, 10))
 
   // Check that steuerId has exactly 11 digits and does not start with 0
-  if (steuerId.length !== 11) { throw new TypeError('`steuerId` must contain exactly 11 digits') }
-  if (!areAllNumbers(steuerId)) { throw new TypeError('`steuerId` can not contain non numerical characters') }
-  if (steuerId[0] === 0) { return false }
+  if (steuerId.length !== 11) {
+    throw new TypeError('`steuerId` must contain exactly 11 digits')
+  }
+  if (!areAllNumbers(steuerId)) {
+    throw new TypeError('`steuerId` can not contain non numerical characters')
+  }
+  if (steuerId[0] === 0) {
+    return false
+  }
 
   // Arranges the characters and their occurrences for easier checks.
   const firstTen = steuerId.slice(0, 10)
@@ -107,7 +127,9 @@ export function validate (steuerId) {
   if (correct) {
     // Makes sure that the checksum character also matches.
     const checksum = getChecksum(firstTen)
-    if (checksum === getTail(steuerId)) { return true }
+    if (checksum === getTail(steuerId)) {
+      return true
+    }
   }
 
   return false
@@ -118,7 +140,9 @@ export function isOccurencesValid (digits) {
   digits.forEach((item) => {
     if (occurences.get(item) === undefined) {
       occurences.set(item, 1)
-    } else { occurences.set(item, occurences.get(item) + 1) }
+    } else {
+      occurences.set(item, occurences.get(item) + 1)
+    }
   })
   console.debug('Occurences: ', occurences)
   let num2or3occurences = 0
@@ -131,7 +155,9 @@ export function isOccurencesValid (digits) {
       return false
     }
     // if there is more than 1 2or3 occurrences return false
-    if (value === 2 || value === 3) { num2or3occurences++ }
+    if (value === 2 || value === 3) {
+      num2or3occurences++
+    }
     if (num2or3occurences > 1) {
       console.debug('Found more than 1 amount of 2 or three occurences is more than one:', num2or3occurences)
       return false
@@ -177,5 +203,5 @@ export function generate () {
     digits = [...candidate]
   }
 
-  return Number(digits.join('') + getChecksum(digits))
+  return digits.join('') + String(getChecksum(digits))
 }
