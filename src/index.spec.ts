@@ -40,15 +40,13 @@ it('throws an error if steuerId contains non numerical characters', () => {
 describe('Generate function', () => {
   it('Is able to generate a number without entering into an infinite loop', () => {
     const generatedTaxID = generate()
-    console.debug('Generated TaxID: ', generatedTaxID)
     assert.deepStrictEqual(typeof generatedTaxID, 'string')
   })
 
   it('Generates valid tax ids', () => {
     for (let i = 0; i < 10; i++) {
       const generatedTaxID = generate()
-      console.debug('Generated TaxID: ', generatedTaxID)
-      assert.deepStrictEqual(validate(String(generatedTaxID)), true)
+      assert.deepStrictEqual(validate(generatedTaxID), true)
     }
   })
 })

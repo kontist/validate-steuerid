@@ -12,6 +12,7 @@
     // "Go to Definition" in VSCode
     "declarationMap": true,
     "lib": ["es2020"],
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "strictNullChecks": true
   }
 }
