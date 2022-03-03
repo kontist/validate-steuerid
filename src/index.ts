@@ -40,14 +40,14 @@ const groupByNumOfOccurrences = (map: Object) => {
 const checkDoubleOrTriple = (groupedByOccurrences = {}) => {
   let num2or3occurences = 0;
 
-  for(const key in groupedByOccurrences) {
+  for (const key in groupedByOccurrences) {
     const occurrence = parseInt(key);
 
     // if there is more than 1 2or3 occurrences return false
     if (occurrence >= 2) {
       num2or3occurences++;
     }
-    
+
     if (num2or3occurences > 1) {
       return false;
     }
@@ -88,19 +88,19 @@ const getChecksum = (steuerId: number[]) => {
   return (checkDigit === 10) ? 0 : checkDigit
 }
 
-export function isOccurencesValid (digits) {
+export function isOccurencesValid(digits: number[]) {
   const groupedByCharacters = getNumOccurencesMap(digits);
   const groupedByOccurrences = groupByNumOfOccurrences(groupedByCharacters);
   let validConsecutive = true;
 
-  if('3' in groupedByOccurrences) {
+  if ('3' in groupedByOccurrences) {
     validConsecutive = checkConsecutivePositions(digits);
   }
-  
+
   return checkDoubleOrTriple(groupedByOccurrences) && validConsecutive;
 }
 
-export function validateSteuerId (steuerId) : boolean{
+export function validateSteuerId(steuerId: String): boolean {
   if (typeof steuerId !== 'string') {
     throw new TypeError('`steuerId` must be a string');
   }
@@ -140,7 +140,7 @@ The first number is not 0
 In the first 10 digits there is exactly one number double or triple
 If there are 3 same numbers at the position 1 to 10 those double numbers could never be consecutive
  */
-export function generateSteuerId () : string {
+export function generateSteuerId(): string {
   let digits: number[];
   digits = [];
   // does not start with a 0

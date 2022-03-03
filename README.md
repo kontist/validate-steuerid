@@ -2,15 +2,18 @@
 > Package to validate German tax ID / steuer ID
 
 # Installation
-``` 
+```
 npm install validate-steuerid
 ```
 
+```
+yarn add validate-steuerid
+```
 # Usage
 
 You can either validate steuerId or generate a valid steuerId
 ```js
-const { validateSteuerId, generateSteuerId } = require('validate-steuerid')
+import { validateSteuerId, generateSteuerId } from 'validate-steuerid'
 
 validateSteuerId('65299970480')
 // => false
@@ -30,17 +33,13 @@ generateSteuerId()
 ### Takes `steuerId`:
   - type: `string`
 ### Returns `boolean`
-<br>
 
 ## generateSteuerId()
-### Returns `string`
 
-<br>
+### Returns `string`
 
 # References
 For developing the algorithm, we referenced the European Commission's TIN check modules stated [here](https://ec.europa.eu/taxation_customs/tin/#/check-tin).
-
-<br>
 
 ---
 
