@@ -9,9 +9,15 @@
     "module": "es6",
     "target": "es5",
     "jsx": "react",
-    "allowJs": true,
     "moduleResolution": "node",
     "sourceMap": true,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    // "Go to Definition" in VSCode
+    "declarationMap": true,
+    // Generate d.ts files
+    "declaration": true,
+    // Tells TypeScript to read JS files, as
+    // normally they are ignored as source files
+    "allowJs": true
   }
 }
