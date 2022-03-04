@@ -1,8 +1,7 @@
 {
   "name": "validate-steuerid",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Package to validate German tax ID / steuer ID",
-  "type": "module",
   "keywords": [
     "deutschland",
     "german",
@@ -16,10 +15,10 @@
   "license": "MIT",
   "repository": "kontist/validate-steuerid",
   "author": "Kontist GmbH (kontist.com)",
-  "main": "dist/index.js",
+  "main": "./dist/main.js",
   "scripts": {
-    "transpile": "tsc && babel --root-mode upward src --extensions \".js\" --out-dir dist --copy-files --source-maps --quiet && echo \"--ALL FILES TRANSPILED!\"",
-    "test": "ts-mocha -p tsconfig.json src/**/*.spec.ts"
+    "build": "webpack",
+    "test": "mocha ./test/**/*.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
@@ -31,10 +30,12 @@
     "@typescript-eslint/parser": "^5.5.0",
     "mocha": "^9.0.3",
     "standard": "^16.0.3",
-    "ts-mocha": "^9.0.2",
-    "ts-node": "^10.5.0",
+    "ts-loader": "^9.2.7",
+    "tsconfig-paths": "^3.13.0",
     "tsd": "^0.17.0",
-    "typescript": "^3.9.3"
+    "typescript": "^4.6.2",
+    "webpack": "^5.69.1",
+    "webpack-cli": "^4.9.2"
   },
   "engines": {
     "node": ">=12"

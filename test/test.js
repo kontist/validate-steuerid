@@ -1,6 +1,6 @@
 'use strict'
-import { generateSteuerId, validateSteuerId, isOccurencesValid } from './index'
-import * as assert from 'assert'
+const { generateSteuerId, validateSteuerId, isOccurrencesValid } = require('../dist/main')
+const assert = require('assert')
 
 const examples = [
   { steuerId: '26954371827', expected: true },
@@ -15,13 +15,6 @@ for (const example of examples) {
     assert.strictEqual(validateSteuerId(example.steuerId), example.expected)
   })
 }
-
-it('throws an error if steuerId is not a string', () => {
-  assert.throws(() => validateSteuerId(65299970480), {
-    name: 'TypeError',
-    message: '`steuerId` must be a string'
-  })
-})
 
 it('throws an error if steuerId does not contain 11 digits', () => {
   assert.throws(() => validateSteuerId('26954371'), {
@@ -51,9 +44,9 @@ describe('Generate function', () => {
   })
 })
 
-describe('isOccurencesValid function returs false on obviously false numbers', () => {
+describe('isOccurrencesValid function returns false on obviously false numbers', () => {
   it('Return false on triplets 10002345671', () => {
-    const result = isOccurencesValid(String(10002345671).split(''))
+    const result = isOccurrencesValid(String(10002345671).split('').map(item => Number(item)))
     assert.deepStrictEqual(result, false)
   })
 })

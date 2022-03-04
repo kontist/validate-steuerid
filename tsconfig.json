@@ -1,18 +1,24 @@
 {
   // Change this to match your project
-  "include": ["src/**/*"],
+  "include": [
+    "src/**/*"
+  ],
   "compilerOptions": {
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "module": "es2020",
+    "target": "es2020",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "suppressImplicitAnyIndexErrors": true,
+    // "Go to Definition" in VSCode
+    "declarationMap": true,
+    // Generate d.ts files
+    "declaration": true,
     // Tells TypeScript to read JS files, as
     // normally they are ignored as source files
     "allowJs": true,
-    // Generate d.ts files
-    "declaration": true,
-    "outDir": "dist",
-    // go to js file when using IDE functions like
-    // "Go to Definition" in VSCode
-    "declarationMap": true,
-    "lib": ["es2020"],
-    "downlevelIteration": true,
-    "strictNullChecks": true
-  }
+    "esModuleInterop": true
+  },
 }
