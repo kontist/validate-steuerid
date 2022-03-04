@@ -11,7 +11,7 @@ const getTail = (arr: number[]) => {
   return lastIndex >= 0 ? arr[lastIndex] : null;
 }
 
-const getNumOccurencesMap = (arr: number[]) => {
+const getNumOccurrencesMap = (arr: number[]) => {
   const map = {};
   arr.forEach((num: number) => {
     if (!(num in map)) {
@@ -38,17 +38,17 @@ const groupByNumOfOccurrences = (map: Object) => {
 
 // has to have either one double digit OR one triple digit, never both.
 const checkDoubleOrTriple = (groupedByOccurrences = {}) => {
-  let num2or3occurences = 0;
+  let num2or3occurrences = 0;
 
   for (const key in groupedByOccurrences) {
     const occurrence = parseInt(key);
 
     // if there is more than 1 2or3 occurrences return false
     if (occurrence >= 2) {
-      num2or3occurences++;
+      num2or3occurrences++;
     }
 
-    if (num2or3occurences > 1) {
+    if (num2or3occurrences > 1) {
       return false;
     }
   }
@@ -88,8 +88,8 @@ const getChecksum = (steuerId: number[]) => {
   return (checkDigit === 10) ? 0 : checkDigit
 }
 
-export function isOccurencesValid(digits: number[]) {
-  const groupedByCharacters = getNumOccurencesMap(digits);
+export function isOccurrencesValid(digits: number[]) {
+  const groupedByCharacters = getNumOccurrencesMap(digits);
   const groupedByOccurrences = groupByNumOfOccurrences(groupedByCharacters);
   let validConsecutive = true;
 
@@ -122,7 +122,7 @@ export function validateSteuerId(steuerId: String): boolean {
   // Arranges the characters and their occurrences for easier checks.
   const firstTen = steuerIdArr.slice(0, 10);
   // Checks the validaty of the steuerId
-  const correct = isOccurencesValid(firstTen);
+  const correct = isOccurrencesValid(firstTen);
 
   if (correct) {
     // Makes sure that the checksum character also matches.
@@ -156,7 +156,7 @@ export function generateSteuerId(): string {
     while (!isValidDigit) {
       candidateDigit = Math.round(Math.random() * 9)
       candidate = [...digits, candidateDigit]
-      if (isOccurencesValid(candidate)) {
+      if (isOccurrencesValid(candidate)) {
         isValidDigit = true;
       }
     }

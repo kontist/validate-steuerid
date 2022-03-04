@@ -1,5 +1,5 @@
 'use strict'
-const { generateSteuerId, validateSteuerId, isOccurencesValid } = require('../dist/main')
+const { generateSteuerId, validateSteuerId, isOccurrencesValid } = require('../dist/main')
 const assert = require('assert')
 
 const examples = [
@@ -44,9 +44,9 @@ describe('Generate function', () => {
   })
 })
 
-describe('isOccurencesValid function returs false on obviously false numbers', () => {
+describe('isOccurrencesValid function returns false on obviously false numbers', () => {
   it('Return false on triplets 10002345671', () => {
-    const result = isOccurencesValid(String(10002345671).split('').map(item => Number(item)))
+    const result = isOccurrencesValid(String(10002345671).split('').map(item => Number(item)))
     assert.deepStrictEqual(result, false)
   })
 })
