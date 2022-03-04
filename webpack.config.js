@@ -19,9 +19,9 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
-    library: 'validate-steuerid',
-    libraryTarget: 'umd2',
-    // @see {@link https://stackoverflow.com/questions/64639839/typescript-webpack-library-generates-referenceerror-self-is-not-defined}
+    library: {
+      type: 'umd2'
+    },
     globalObject: 'this',
   },
 }

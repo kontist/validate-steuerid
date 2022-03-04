@@ -15,9 +15,7 @@
   "license": "MIT",
   "repository": "kontist/validate-steuerid",
   "author": "Kontist GmbH (kontist.com)",
-  "main": "dist/index.js",
-  "module": "dist/main.js",
-  "exports": "./dist/main.js",
+  "main": "./dist/main.js",
   "scripts": {
     "build": "webpack",
     "test": "mocha ./test/**/*.js"
