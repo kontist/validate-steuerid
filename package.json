@@ -19,7 +19,7 @@
   "module": "dist/main.js",
   "exports": "./dist/main.js",
   "scripts": {
-    "transpile": "tsc && babel --root-mode upward src --extensions \".js\" --out-dir dist --copy-files --source-maps --quiet && echo \"--ALL FILES TRANSPILED!\"",
+    "build": "webpack",
     "test": "mocha ./test/**/*.js"
   },
   "devDependencies": {
