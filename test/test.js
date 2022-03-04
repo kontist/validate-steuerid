@@ -1,13 +1,13 @@
 'use strict'
-import {generateSteuerId, validateSteuerId, isOccurencesValid} from './index'
-import * as assert from 'assert'
+const { generateSteuerId, validateSteuerId, isOccurencesValid } = require('../dist/main')
+const assert = require('assert')
 
 const examples = [
-  {steuerId: '26954371827', expected: true},
-  {steuerId: '86095742719', expected: true},
-  {steuerId: '65929970489', expected: true},
-  {steuerId: '65299970480', expected: false},
-  {steuerId: '26954371820', expected: false}
+  { steuerId: '26954371827', expected: true },
+  { steuerId: '86095742719', expected: true },
+  { steuerId: '65929970489', expected: true },
+  { steuerId: '65299970480', expected: false },
+  { steuerId: '26954371820', expected: false }
 ]
 
 for (const example of examples) {
