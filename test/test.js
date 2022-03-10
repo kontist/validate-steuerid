@@ -16,18 +16,12 @@ for (const example of examples) {
   })
 }
 
-it('throws an error if steuerId does not contain 11 digits', () => {
-  assert.throws(() => validateSteuerId('26954371'), {
-    name: 'TypeError',
-    message: '`steuerId` must contain exactly 11 digits'
-  })
+it('returns false if steuerId does not contain 11 digits', () => {
+  assert.strictEqual(validateSteuerId('26954371'), false)
 })
 
-it('throws an error if steuerId contains non numerical characters', () => {
-  assert.throws(() => validateSteuerId('26954371rfe'), {
-    name: 'TypeError',
-    message: '`steuerId` can not contain non numerical characters'
-  })
+it('returns false if steuerId contains non numerical characters', () => {
+  assert.strictEqual(validateSteuerId('26954371rfe'), false)
 })
 
 describe('Generate function', () => {

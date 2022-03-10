@@ -100,39 +100,36 @@ export function isOccurrencesValid(digits: number[]) {
   return checkDoubleOrTriple(groupedByOccurrences) && validConsecutive;
 }
 
-export function validateSteuerId(steuerId: String): boolean {
-  if (typeof steuerId !== 'string') {
-    throw new TypeError('`steuerId` must be a string');
-  }
-
-  // Make sure the steuerId is string then split it into an integer array
-  let steuerIdArr = steuerId.split('').map(n => parseInt(n, 10));
-
-  // Check that steuerId has exactly 11 digits and does not start with 0
-  if (steuerId.length !== 11) {
-    throw new TypeError('`steuerId` must contain exactly 11 digits');
-  }
-  if (!areAllNumbers(steuerIdArr)) {
-    throw new TypeError('`steuerId` can not contain non numerical characters');
-  }
-  if (steuerIdArr[0] === 0) {
-    return false;
-  }
-
-  // Arranges the characters and their occurrences for easier checks.
-  const firstTen = steuerIdArr.slice(0, 10);
-  // Checks the validaty of the steuerId
-  const correct = isOccurrencesValid(firstTen);
-
-  if (correct) {
-    // Makes sure that the checksum character also matches.
-    const checksum = getChecksum(firstTen);
-    if (checksum === getTail(steuerIdArr)) {
-      return true;
+export function validateSteuerId(steuerId: string): boolean {
+  try {
+    if (typeof steuerId !== 'string') {
+      return false;
     }
-  }
+    // Make sure the steuerId is string then split it into an integer array
+    const steuerIdArr = steuerId.split('').map(n => parseInt(n, 10));
 
-  return false;
+    // Check that steuerId has exactly 11 digits and does not start with 0
+    if (steuerIdArr[0] === 0 || steuerId.length !== 11 || !areAllNumbers(steuerIdArr)) {
+      return false;
+    }
+
+    // Arranges the characters and their occurrences for easier checks.
+    const firstTen = steuerIdArr.slice(0, 10);
+    // Checks the validaty of the steuerId
+    const correct = isOccurrencesValid(firstTen);
+
+    if (correct) {
+      // Makes sure that the checksum character also matches.
+      const checksum = getChecksum(firstTen);
+      if (checksum === getTail(steuerIdArr)) {
+        return true;
+      }
+    }
+
+    return false;
+  } catch ({ message }) {
+    throw new Error(message);
+  }
 }
 
 /*
