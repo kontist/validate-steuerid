@@ -100,11 +100,8 @@ export function isOccurrencesValid(digits: number[]) {
   return checkDoubleOrTriple(groupedByOccurrences) && validConsecutive;
 }
 
-export function validateSteuerId(steuerId: string): boolean {
+export function isSteuerIdValid(steuerId: string): boolean {
   try {
-    if (typeof steuerId !== 'string') {
-      return false;
-    }
     // Make sure the steuerId is string then split it into an integer array
     const steuerIdArr = steuerId.split('').map(n => parseInt(n, 10));
 
