@@ -101,32 +101,28 @@ export function isOccurrencesValid(digits: number[]) {
 }
 
 export function isSteuerIdValid(steuerId: string): boolean {
-  try {
-    // Make sure the steuerId is string then split it into an integer array
-    const steuerIdArr = steuerId.split('').map(n => parseInt(n, 10));
+  // Make sure the steuerId is string then split it into an integer array
+  const steuerIdArr = steuerId.split('').map(n => parseInt(n, 10));
 
-    // Check that steuerId has exactly 11 digits and does not start with 0
-    if (steuerIdArr[0] === 0 || steuerId.length !== 11 || !areAllNumbers(steuerIdArr)) {
-      return false;
-    }
-
-    // Arranges the characters and their occurrences for easier checks.
-    const firstTen = steuerIdArr.slice(0, 10);
-    // Checks the validaty of the steuerId
-    const correct = isOccurrencesValid(firstTen);
-
-    if (correct) {
-      // Makes sure that the checksum character also matches.
-      const checksum = getChecksum(firstTen);
-      if (checksum === getTail(steuerIdArr)) {
-        return true;
-      }
-    }
-
+  // Check that steuerId has exactly 11 digits and does not start with 0
+  if (steuerIdArr[0] === 0 || steuerId.length !== 11 || !areAllNumbers(steuerIdArr)) {
     return false;
-  } catch ({ message }) {
-    throw new Error(message);
   }
+
+  // Arranges the characters and their occurrences for easier checks.
+  const firstTen = steuerIdArr.slice(0, 10);
+  // Checks the validaty of the steuerId
+  const correct = isOccurrencesValid(firstTen);
+
+  if (correct) {
+    // Makes sure that the checksum character also matches.
+    const checksum = getChecksum(firstTen);
+    if (checksum === getTail(steuerIdArr)) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 /*
