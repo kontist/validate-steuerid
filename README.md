@@ -13,15 +13,15 @@ yarn add validate-steuerid
 
 You can either validate steuerId or generate a valid steuerId
 ```js
-import { validateSteuerId, generateSteuerId } from 'validate-steuerid'
+import { isSteuerIdValid, generateSteuerId } from 'validate-steuerid'
 
-validateSteuerId('65299970480')
+isSteuerIdValid('65299970480')
 // => false
 
-validateSteuerId('65929970489')
+isSteuerIdValid('65929970489')
 // => true
 
-validateSteuerId('26954371827')
+isSteuerIdValid('26954371827')
 // => true
 
 generateSteuerId()
@@ -29,7 +29,7 @@ generateSteuerId()
 ```
 
 # Methods
-## validateSteuerId(steuerId)
+## isSteuerIdValid(steuerId)
 ### Takes `steuerId`:
   - type: `string`
 ### Returns `boolean`
