@@ -1,5 +1,5 @@
 'use strict'
-const { generateSteuerId, validateSteuerId, isOccurrencesValid } = require('../dist/main')
+const { generateSteuerId, isSteuerIdValid, isOccurrencesValid } = require('../dist/main')
 const assert = require('assert')
 
 const examples = [
@@ -10,25 +10,21 @@ const examples = [
   { steuerId: '26954371820', expected: false }
 ]
 
-for (const example of examples) {
-  it('validates a steuerId successfully', () => {
-    assert.strictEqual(validateSteuerId(example.steuerId), example.expected)
+describe('isSteuerIdValid function', () => {
+  for (const example of examples) {
+    it('validates a steuerId successfully', () => {
+      assert.strictEqual(isSteuerIdValid(example.steuerId), example.expected)
+    })
+  }
+  
+  it('returns false if steuerId does not contain 11 digits', () => {
+    assert.strictEqual(isSteuerIdValid('26954371'), false)
   })
-}
-
-it('throws an error if steuerId does not contain 11 digits', () => {
-  assert.throws(() => validateSteuerId('26954371'), {
-    name: 'TypeError',
-    message: '`steuerId` must contain exactly 11 digits'
+  
+  it('returns false if steuerId contains non numerical characters', () => {
+    assert.strictEqual(isSteuerIdValid('26954371rfe'), false)
   })
-})
-
-it('throws an error if steuerId contains non numerical characters', () => {
-  assert.throws(() => validateSteuerId('26954371rfe'), {
-    name: 'TypeError',
-    message: '`steuerId` can not contain non numerical characters'
-  })
-})
+});
 
 describe('Generate function', () => {
   it('Is able to generate a number without entering into an infinite loop', () => {
@@ -39,7 +35,7 @@ describe('Generate function', () => {
   it('Generates valid tax ids', () => {
     for (let i = 0; i < 10; i++) {
       const generatedTaxID = generateSteuerId()
-      assert.deepStrictEqual(validateSteuerId(generatedTaxID), true)
+      assert.deepStrictEqual(isSteuerIdValid(generatedTaxID), true)
     }
   })
 })

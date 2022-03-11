@@ -100,22 +100,12 @@ export function isOccurrencesValid(digits: number[]) {
   return checkDoubleOrTriple(groupedByOccurrences) && validConsecutive;
 }
 
-export function validateSteuerId(steuerId: String): boolean {
-  if (typeof steuerId !== 'string') {
-    throw new TypeError('`steuerId` must be a string');
-  }
-
+export function isSteuerIdValid(steuerId: string): boolean {
   // Make sure the steuerId is string then split it into an integer array
-  let steuerIdArr = steuerId.split('').map(n => parseInt(n, 10));
+  const steuerIdArr = steuerId.split('').map(n => parseInt(n, 10));
 
   // Check that steuerId has exactly 11 digits and does not start with 0
-  if (steuerId.length !== 11) {
-    throw new TypeError('`steuerId` must contain exactly 11 digits');
-  }
-  if (!areAllNumbers(steuerIdArr)) {
-    throw new TypeError('`steuerId` can not contain non numerical characters');
-  }
-  if (steuerIdArr[0] === 0) {
+  if (steuerIdArr[0] === 0 || steuerId.length !== 11 || !areAllNumbers(steuerIdArr)) {
     return false;
   }
 
