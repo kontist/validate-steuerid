@@ -52,13 +52,13 @@ describe('Generate unique tax ids', () => {
     const taxIdArray = generateUniqueSteuerIds(2)
     assert.strictEqual(taxIdArray.length, 2)
   })
-  it('Generates valid tax ids', () => {
-    const taxIdArray = generateUniqueSteuerIds(2)
-    taxIdArray.forEach((id) => assert.strictEqual(isSteuerIdValid(id), true))
-  })
   it('Generates a unique set of tax ids', () => {
     const taxIdArray = generateUniqueSteuerIds(10)
     const taxIdSet = new Set(taxIdArray)
     assert.strictEqual(taxIdArray.length, taxIdSet.size)
+  })
+  it('Generates valid tax ids', () => {
+    const taxIdArray = generateUniqueSteuerIds(2)
+    taxIdArray.forEach((id) => assert.strictEqual(isSteuerIdValid(id), true))
   })
 })

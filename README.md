@@ -41,7 +41,10 @@ generateUniqueSteuerIds(2)
 * ### Returns `string`
 
 ## generateUniqueSteuerIds(numberOfSteuerIds)
-* ### Returns `Array` of `strings`
+* ### Takes `numberOfSteuerIds`:
+  - type: `number`
+* ### Returns `Array`:
+  - type: `string`
   
 <br>
 

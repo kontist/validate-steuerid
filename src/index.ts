@@ -156,7 +156,7 @@ export function generateSteuerId(): string {
   return digits.join('') + String(getChecksum(digits))
 }
 
-export const generateUniqueSteuerIds = (countOfUnique: number): string[] => {
+export function generateUniqueSteuerIds (countOfUnique: number): string[] {
   const setOfSteuerIds = new Set<string>();
 
   while (setOfSteuerIds.size < countOfUnique) {
@@ -164,4 +164,4 @@ export const generateUniqueSteuerIds = (countOfUnique: number): string[] => {
   }
 
   return Array.from(setOfSteuerIds);
-};
+}
