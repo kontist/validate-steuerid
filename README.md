@@ -13,7 +13,7 @@ yarn add validate-steuerid
 
 You can either validate steuerId or generate a valid steuerId
 ```js
-import { isSteuerIdValid, generateSteuerId } from 'validate-steuerid'
+import { isSteuerIdValid, generateSteuerId, generateUniqueSteuerIds } from 'validate-steuerid'
 
 isSteuerIdValid('65299970480')
 // => false
@@ -26,20 +26,29 @@ isSteuerIdValid('26954371827')
 
 generateSteuerId()
 // => random steuerId string
+
+generateUniqueSteuerIds(2)
+// => array of 2 unique steuer id strings
 ```
 
 # Methods
 ## isSteuerIdValid(steuerId)
-### Takes `steuerId`:
+* ### Takes `steuerId`:
   - type: `string`
-### Returns `boolean`
+* ### Returns `boolean`
 
 ## generateSteuerId()
+* ### Returns `string`
 
-### Returns `string`
+## generateUniqueSteuerIds(numberOfSteuerIds)
+* ### Returns `Array` of `strings`
+  
+<br>
 
 # References
 For developing the algorithm, we referenced the European Commission's TIN check modules stated [here](https://ec.europa.eu/taxation_customs/tin/#/check-tin).
+
+<br>
 
 ---
 
