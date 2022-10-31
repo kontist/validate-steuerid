@@ -1,2 +1,2 @@
 const main = require("../dist/main");
-console.info(main.generateUniqueSteuerIds(Number(process.argv[2])));
+console.dir(main.generateUniqueSteuerIds(Number(process.argv[2])), {maxArrayLength: null});
