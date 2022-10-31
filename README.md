@@ -10,8 +10,10 @@ npm install validate-steuerid
 yarn add validate-steuerid
 ```
 # Usage
+## As a module
 
 You can either validate steuerId or generate a valid steuerId
+
 ```js
 import { isSteuerIdValid, generateSteuerId, generateUniqueSteuerIds } from 'validate-steuerid'
 
@@ -30,6 +32,10 @@ generateSteuerId()
 generateUniqueSteuerIds(2)
 // => array of 2 unique steuer id strings
 ```
+## Shell
+```shell
+yarn generateUniqueSteuerIds 20
+```
 
 # Methods
 ## isSteuerIdValid(steuerId)
@@ -45,7 +51,7 @@ generateUniqueSteuerIds(2)
   - type: `number`
 * ### Returns `Array`:
   - type: `string`
-  
+
 <br>
 
 # References
