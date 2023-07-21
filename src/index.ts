@@ -36,19 +36,38 @@ const groupByNumOfOccurrences = (map: Object) => {
   return result;
 }
 
-// has to have either one double digit OR one triple digit, never both.
-const checkDoubleOrTriple = (groupedByOccurrences = {}) => {
-  let num2or3occurrences = 0;
+const checkConstraints = (groupedByOccurrences = {}, length: number) => {
+  // there are always digits which do not repeat
+  if (!('1' in groupedByOccurrences)) {
+    return false;
+  }
+
+  // at least one digit has to repeat two or three times
+  // check not active while generating tax ids (shorter than 10 digits)
+  if (length === 10 && !('2' in groupedByOccurrences) && !('3' in groupedByOccurrences)) {
+    return false;
+  }
+
+  // has to have either double digit OR triple digit, never both
+  if ('2' in groupedByOccurrences && '3' in groupedByOccurrences) {
+    return false;
+  }
+
+  // if a digit repeats two times - only one digit should do that
+  if (groupedByOccurrences['2']?.length > 1) {
+    return false;
+  }
+
+  // if a digit repeats three times - only one digit should do that
+  if (groupedByOccurrences['3']?.length > 1) {
+    return false;
+  }
 
   for (const key in groupedByOccurrences) {
     const occurrence = parseInt(key);
 
-    // if there is more than 1 2or3 occurrences return false
-    if (occurrence >= 2) {
-      num2or3occurrences++;
-    }
-
-    if (num2or3occurrences > 1) {
+    // no digit should repeat more than 3 times
+    if (occurrence > 3) {
       return false;
     }
   }
@@ -97,7 +116,7 @@ export function isOccurrencesValid(digits: number[]) {
     validConsecutive = checkConsecutivePositions(digits);
   }
 
-  return checkDoubleOrTriple(groupedByOccurrences) && validConsecutive;
+  return checkConstraints(groupedByOccurrences, digits.length) && validConsecutive;
 }
 
 export function isSteuerIdValid(steuerId: string): boolean {
