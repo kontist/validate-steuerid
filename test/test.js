@@ -6,21 +6,37 @@ const examples = [
   { steuerId: '26954371827', expected: true },
   { steuerId: '86095742719', expected: true },
   { steuerId: '65929970489', expected: true },
+
   { steuerId: '65299970480', expected: false },
-  { steuerId: '26954371820', expected: false }
-]
+  { steuerId: '26954371820', expected: false },
+  { steuerId: '37505648067', expected: false },
+  { steuerId: '11112345678', expected: false },
+  { steuerId: '11111345677', expected: false },
+  { steuerId: '11111145670', expected: false },
+  { steuerId: '11111115672', expected: false },
+  { steuerId: '11111111670', expected: false },
+  { steuerId: '11111111178', expected: false },
+  { steuerId: '11111111119', expected: false },
+
+  // official examples from table 2-1 of https://download.elster.de/download/schnittstellen/Pruefung_der_Steuer_und_Steueridentifikatsnummer.pdf
+  { steuerId: '86095742719', expected: true },
+  { steuerId: '47036892816', expected: true },
+  { steuerId: '65929970489', expected: true },
+  { steuerId: '57549285017', expected: true },
+  { steuerId: '25768131411', expected: true },
+];
 
 describe('isSteuerIdValid function', () => {
   for (const example of examples) {
-    it('validates a steuerId successfully', () => {
+    it('validates a steuerId ' + example.steuerId + ' and returns ' + example.expected, () => {
       assert.strictEqual(isSteuerIdValid(example.steuerId), example.expected)
     })
   }
-  
+
   it('returns false if steuerId does not contain 11 digits', () => {
     assert.strictEqual(isSteuerIdValid('26954371'), false)
   })
-  
+
   it('returns false if steuerId contains non numerical characters', () => {
     assert.strictEqual(isSteuerIdValid('26954371rfe'), false)
   })
